@@ -26,25 +26,16 @@ class TemplateTest extends TestCase {
         mkdir('tpl');
         mkdir('tpl/default');
         file_put_contents('tpl/default/test.tpl', <<<END
-                Hello <?=\$this->name; ?>!
+                Hello <?=\$name; ?>!
                 END);
         
         mkdir('tpl/tr');
         file_put_contents('tpl/tr/test.tpl', <<<END
-                Privet <?=\$this->name; ?>!
+                Privet <?=\$name; ?>!
                 END);
 
         $this->assertTrue(file_exists('tpl/default/test.tpl'));
         $this->assertTrue(file_exists('tpl/tr/test.tpl'));
-    }
-    
-    public function testExceptionVarNotSet() {
-        
-        $this->expectExceptionCode(-10015);
-        $template = new Template('test.tpl');
-        $template->setTemplateDir('tpl');
-        $template->display();
-        
     }
     
     public function testPropperDisplay() {

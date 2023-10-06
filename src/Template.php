@@ -24,19 +24,17 @@ class Template {
         $this->language_code = $language_code;
     }
     
-    public function __get($name) {
-        if (isset($this->__data[$name])) {
-            return $this->__data[$name];
-        }
-        throw new \Exception("Property $name is not set.", -10015);
-    }
-
     public function assign($name, $value) {
         $this->__data[$name] = $value;
     }
     
     public function display() {
         $template = $this->getTemplatePath();
+        
+        foreach ($this->__data as $key => $value) {
+            ${$key} = $value;
+        }
+
         include $template;
     }
     
@@ -44,7 +42,7 @@ class Template {
         $template = $this->getTemplatePath();
         
         ob_start();
-        include $template;
+        $this->display();
         return ob_get_clean();
     }
     public function setTemplateDir($dir) {

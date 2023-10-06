@@ -18,7 +18,7 @@ It seems not very usefull, so you can create more complex templates as in next e
 
 Create a template file ex. `templatex/default/simple-template.tpl` with code:
 ```
-Hello <?=$this->name; ?>!
+Hello <?=$name; ?>!
 ```
 
 Now to display "Hello John!" do the following:
@@ -34,11 +34,14 @@ $template->display();
 
 Use `$template = new Template('template.tpl', 'de');` to use templates in `templates/de/` instead of `templates/default/`.
 
-You can change default templates dir from `templates/` to `anydir/` you want by using `$template->setTemplateDir('anydir')`.
+You can change default templates dir from `templates/` to `anydir/` you want by using 
+```
+$template->setTemplateDir('anydir')
+```
 
 ## Do not display output
 
 Sometimes you don't want to display output. You may need just to get the template output for further processing. Use this:
-``
+```
 $result = $template->process(); // insead of $template->display();
-`` 
+``` 
